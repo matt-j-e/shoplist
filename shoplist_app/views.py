@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from django.forms.formsets import formset_factory
 from .models import Item, StorageLoc, ShopDept, Meal
 from .forms import ItemForm, MealForm, LocationForm, DepartmentForm, FindItemForm, SelectItemForm, MealSelectForm
+import shoplist_app.helpers as helpers
+
+# a global varaible to enable meal_choices to be passed between view methods
+# list_meal_add and list_stock_add
+meal_choices = []
 
 def list_new(request):
 	''' Main menu page for creating a new shopping list. Simply two links:
@@ -19,28 +24,31 @@ def list_meal_add(request):
 		# print(request.POST) # request.POST seems to be a dictionary of lists where each list contains a single value
 		formset = MealSelectFormset(data=request.POST)
 		if formset.is_valid:
-			collected_data = [
-				int(request.POST['form-0-selection']),
-				int(request.POST['form-1-selection']),
-				int(request.POST['form-2-selection']),
-				int(request.POST['form-3-selection']),
-				int(request.POST['form-4-selection']),
-				int(request.POST['form-5-selection']),
-				int(request.POST['form-6-selection'])
-			]
-		print(collected_data)
-		# collected_data is a list of 7 integers that represent the
+			global meal_choices
+			meal_choices = helpers.extract_meal_choices(request.POST)
+			return redirect('stock_items_add')
+		# meal_choices is a list of 7 integers that represent the
 		# meal_ids of chosen meals (the integer may be 0 if no meal chosen
 		# for that day)
 			
 			
-
-
 def list_stock_add(request):
 	''' A page that lists all of the shopping items marked as favourite, in storage
 	location order TOGETHER WITH the meal shopping items added in the list_meal_add
-	process (also in the appropriate storage area) '''
-	pass
+	process (also in the appropriate storage area) 
+	meals_shopping_list = []
+	for meal_id in meal_choices:
+		if meal_id == 0:
+			continue
+		meal = Meal.objects.get(id=meal_id)
+		items = meal.items.all()
+		for item in items:
+			item.need_for = meal.short_name
+			meals_shopping_list.append(item) '''
+
+	meals_shopping_list = helpers.create_meals_shopping_list(meal_choices)
+	for item in meals_shopping_list:
+		print(item.id, item.name, item.storage_loc.id, item.need_for)
 
 
 def item_list(request):
@@ -209,13 +217,13 @@ def add_meal(request):
 	context = {'form': form}
 	return render(request, 'shoplist_app/add_meal.html', context)
 
-
+"""
 def add_meal_item(request, meal_id):
 	''' add shopping items to a meal that is already in the db '''
 	meal = Meal.objects.get(id=meal_id)
 	item = Item.objects.get(id=request.POST["selection"])
 	meal.items.add(item)
-	return redirect('find_item') 
+	return redirect('find_item') """
 
 
 
