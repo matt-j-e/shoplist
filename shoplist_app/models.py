@@ -43,8 +43,8 @@ class Meal(models.Model):
 	serves = models.SmallIntegerField()
 	cook_time = models.SmallIntegerField("Cooking Time (mins)")
 	total_time = models.SmallIntegerField("Total Time (mins)")
-	ingredients = models.TextField()
-	method = models.TextField()
+	ingredients = models.TextField(blank=True)
+	method = models.TextField(blank=True)
 	items = models.ManyToManyField(Item)
 
 	def __str__(self):

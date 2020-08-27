@@ -98,7 +98,9 @@ def find_item(request):
 	items to choose that match the search string. Or give the option to add
 	a completely new item. '''
 	meals = Meal.objects.all().order_by("id")
-	meal_id = meals.reverse()[:1][0].id
+	meal = meals.reverse()[:1][0]
+	# meal_id = meal.id
+	meal.shoppinglist = meal.items.all()
 	if request.method != 'POST':
 		# no form data submitted - must be "first" visit. Render blsnk form
 		form = FindItemForm()
@@ -120,12 +122,12 @@ def find_item(request):
 					choice = (m.id, m.name)
 					CUSTOM_CHOICES.append(choice)
 				select_form.fields["selection"].choices = CUSTOM_CHOICES
-				return render(request, 'shoplist_app/display_matches.html', {"form": select_form, "meal_id": meal_id})
+				return render(request, 'shoplist_app/display_matches.html', {"form": select_form, "meal": meal})
 			else:
 				select_form = ItemForm()
-				return render(request, 'shoplist_app/no_matches.html', {"form": select_form, "meal_id": meal_id})
+				return render(request, 'shoplist_app/no_matches.html', {"form": select_form, "meal": meal})
 			
-	return render(request, 'shoplist_app/find_item.html', {"form": form})
+	return render(request, 'shoplist_app/find_item.html', {"form": form, "meal": meal})
 
 
 def index(request):

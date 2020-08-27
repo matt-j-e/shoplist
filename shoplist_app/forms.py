@@ -28,7 +28,9 @@ class DepartmentForm(forms.ModelForm):
 class MealForm(forms.ModelForm):
 	class Meta:
 		model = Meal
-		fields = ['name', 'short_name', 'serves', 'cook_time', 'total_time', 'ingredients', 'method']
+		# fields = ['name', 'short_name', 'serves', 'cook_time', 'total_time', 'ingredients', 'method']
+		# temporarily removed ings & method from the form to simplify matters
+		fields = ['name', 'short_name', 'serves', 'cook_time', 'total_time']
 
 
 class FindItemForm(forms.Form):
