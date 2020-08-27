@@ -1,0 +1,29 @@
+{% extends 'shoplist_app/base.html' %}
+
+{% block content %}
+	<p>Edit shop department</p>
+	<form action="{% url 'edit_department' department.id %}" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button name="submit">Save changes</button>
+	</form>
+
+	<div>
+		<h4>Items which you will find in this department:</h4>
+		{% for item in items %}
+			{% if item.favourite %}
+				<p>{{ item.name }}</p>
+			{% endif %}
+		{% empty %}
+			<p>It looks like you don't visit this department.</p>
+		{% endfor %}
+	</div>
+
+	<div>
+		<h4>Existing shop departments in the order that you generally visit them:</h4>
+		{% for department in all_departments %}
+			<p>{{ department.sort_order }} - {{ department.name }}</p>
+		{% endfor %}
+	</div>
+
+{% endblock content %}

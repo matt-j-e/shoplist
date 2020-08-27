@@ -1,0 +1,26 @@
+{% extends 'shoplist_app/base.html' %}
+
+{% block content %}
+<h2>Choose meals for the next 7 days.</h2>
+<p><small>Leave as "No meal selected" if you don't need to cook a meal that day.</small></p>
+<!--
+<section>
+	<h3>Day 1</h3>
+	<form method="post" action="{% url 'meal_items_add' %}">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Choose meal" name="submit">
+	</form>
+</section>
+-->
+<form method="post" action="{% url 'meal_items_add' %}">
+	{{ formset.management_form }}
+	{% csrf_token %}
+	{% for form in formset %}
+	<h4>Day {{ forloop.counter }}</h4>
+	{{ form.as_p }}	
+	{% endfor %}
+	<input type="submit" value="Add your selection" name="submit">
+</form>
+
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends 'shoplist_app/base.html' %}
+
+{% block content %}
+	<p>Edit storage location</p>
+	<form action="{% url 'edit_location' location.id %}" method="post">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button name="submit">Save changes</button>
+	</form>
+
+	<div>
+		<h4>Items which are stored here:</h4>
+		{% for item in items %}
+			{% if item.favourite %}
+				<p>{{ item.name }}</p>
+			{% endif %}
+		{% empty %}
+			<p>It looks like you don't store anything here.</p>
+		{% endfor %}
+	</div>
+
+	<div>
+		<h4>Existing locations in sort order:</h4>
+		{% for location in all_locations %}
+			<p>{{ location.sort_order }} - {{ location.name }}</p>
+		{% endfor %}
+	</div>
+
+{% endblock content %}

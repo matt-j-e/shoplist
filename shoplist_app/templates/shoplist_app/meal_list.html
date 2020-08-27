@@ -1,0 +1,24 @@
+{% extends 'shoplist_app/base.html' %}
+
+{% block content %}
+<h2>Your meals</h2>
+<p><a href="{% url 'add_meal' %}">Add a meal</a></p>
+<ul>
+{% for meal in meals %}
+	<li>{{ meal.name|capfirst }}</li>
+	<ul>
+		<li>Serves: {{ meal.serves }}</li>
+		<li>Total time (mins): {{ meal.total_time }}</li>
+		<li>Ingredients: {{ meal.ingredients|linebreaks|capfirst }}</li>
+		<li>Method: {{ meal.method|linebreaks|capfirst }}</li>
+		<li>
+			Stuff to buy:
+			{% for entry in meal.shoppinglist %}
+			<span>{{ entry|capfirst }};</span>
+			{% endfor %}
+		</li>
+	</ul>
+{% endfor %}
+</ul>
+
+{% endblock content %}

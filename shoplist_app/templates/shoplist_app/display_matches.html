@@ -1,0 +1,13 @@
+{% extends 'shoplist_app/base.html' %}
+
+{% block content %}
+	<p>Meal id = {{ meal_id }}</p>
+	<form method="post" action="{% url 'add_meal_item' meal_id %}">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="Add item" name="Add item">
+	</form>
+	<p>If the item you want to add is not among those shown above...</p>
+	<p><a href="{% url 'add_item' meal_id %}">Add a new item.</a></p>
+
+{% endblock content %}

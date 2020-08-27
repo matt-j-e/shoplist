@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Shopping list creator</title>
+        <meta name="description" content="Shopping List Creator">
+        <meta name="author" content="Matt Edwards">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{% static 'shoplist_app/styles.css' %}">
+        <!--[if lt IE 9]>
+        <script src="js/html5shim.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="container">
+        <header>
+            <h1>Shopping list creator</h1>
+        </header>
+        <main role="main">
+            {% block content %}
+            {% endblock content %}
+        </main>
+        </div>
+    </body>
+</html>
