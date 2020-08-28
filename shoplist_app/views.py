@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.forms.formsets import formset_factory
 from .models import Item, StorageLoc, ShopDept, Meal
-from .forms import ItemForm, MealForm, LocationForm, DepartmentForm, FindItemForm, SelectItemForm, MealSelectForm
+from .forms import ItemForm, MealForm, LocationForm, DepartmentForm, FindItemForm, SelectItemForm, MealSelectForm, SelectItemCheckboxForm
 import shoplist_app.helpers as helpers
 
 # a global varaible to enable meal_choices to be passed between view methods
@@ -35,20 +35,24 @@ def list_meal_add(request):
 def list_stock_add(request):
 	''' A page that lists all of the shopping items marked as favourite, in storage
 	location order TOGETHER WITH the meal shopping items added in the list_meal_add
-	process (also in the appropriate storage area) 
-	meals_shopping_list = []
-	for meal_id in meal_choices:
-		if meal_id == 0:
-			continue
-		meal = Meal.objects.get(id=meal_id)
-		items = meal.items.all()
-		for item in items:
-			item.need_for = meal.short_name
-			meals_shopping_list.append(item) '''
-
-	meals_shopping_list = helpers.create_meals_shopping_list(meal_choices)
-	for item in meals_shopping_list:
+	process (also in the appropriate storage area) '''
+	items_for_meals = helpers.create_meals_shopping_list(meal_choices)
+	for item in items_for_meals:
 		print(item.id, item.name, item.storage_loc.id, item.need_for)
+	locations = StorageLoc.objects.all().order_by('sort_order')
+	# select all storage areas in sort order
+	faves = Item.objects.filter(favourite=True).order_by('storage_loc')
+	# select all items marked fave in storage_id order
+	form = SelectItemCheckboxForm()
+	form.fields["selection"].choices = helpers.create_list_choices(items_for_meals, faves, locations)
+	context = {
+		'items_for_meals': items_for_meals,
+		'locations': locations,
+		'faves': faves,
+		'form': form
+		}
+	if request.method != 'POST':
+		return render(request, 'shoplist_app/list_stock_add.html', context)
 
 
 def item_list(request):

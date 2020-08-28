@@ -48,3 +48,12 @@ class MealSelectForm(forms.Form):
 	for meal in meals:
 		choices.append((meal.id, meal.name))
 	selection = forms.ChoiceField(choices=choices)
+
+
+class SelectItemCheckboxForm(forms.Form):
+	selection = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=(), label="Select items")
+	storage_loc = forms.CharField(widget=forms.HiddenInput())
+	shop_dept = forms.CharField(widget=forms.HiddenInput())
+
+
+

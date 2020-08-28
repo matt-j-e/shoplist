@@ -34,3 +34,23 @@ def create_meals_shopping_list(meal_choices):
 			meals_shopping_list.append(item)
 	return meals_shopping_list
 
+
+def create_list_choices(meal_items, fave_items, locations):
+	''' takes in the meals shopping list and the favourites list, extracts id and name and
+	constructs a 'choices' variable, in storage location order, to pass to a multiple choice
+	field form '''
+	choices = []
+	for l in locations:
+		for i in meal_items:
+			if i.storage_loc != l:
+				continue
+			name = f"{i.name} [{i.need_for}]"
+			choice = (i.id, name)
+			choices.append(choice)
+
+		for j in fave_items:
+			if j.storage_loc != l:
+				continue
+			choice = (j.id, j.name)
+			choices.append(choice)
+	return choices
