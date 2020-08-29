@@ -3,30 +3,12 @@
 {% block content %}
 <h2>Choose favourites to add to a new list.</h2>
 <p><small>Items required for the meals you have already chosen are pre-selected. Simply de-select if you already have that item in your cupboards.</small></p>
-<!--
-{% for location in locations %}
-	<h4>{{ location.name|capfirst }}</h4>
-
-	{% for item in items_for_meals %}
-		{% if item.storage_loc == location %}
-		<p>{{ item.name }} : {{ item.need_for }}</p>
-		{% endif %}
-	{% endfor %}
-
-	{% for item in faves %}
-		{% if item.storage_loc == location %}
-		<p>{{ item.name }}</p>
-		{% endif %}
-	{% endfor %}
-
-{% endfor %}
--->
 
 <form method="post" action="{% url 'stock_items_add' %}">
 	{% csrf_token %}
 	
 	
-	{{ form.as_p }}	
+	{{ form }}	
 	
 	<input type="submit" value="Finalise your list" name="submit">
 </form>

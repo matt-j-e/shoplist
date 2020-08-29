@@ -35,22 +35,50 @@ def create_meals_shopping_list(meal_choices):
 	return meals_shopping_list
 
 
-def create_list_choices(meal_items, fave_items, locations):
-	''' takes in the meals shopping list and the favourites list, extracts id and name and
-	constructs a 'choices' variable, in storage location order, to pass to a multiple choice
-	field form '''
-	choices = []
-	for l in locations:
-		for i in meal_items:
-			if i.storage_loc != l:
+def create_initial_list(meal_items, fave_items, locations):
+	''' takes in the meals shopping list and the favourites list and constructs a list of 
+	dictionaries in storage location order. Each dictionary contains: 
+	item.id
+	item.name
+	item.storage_loc.id
+	item.shop_dept.id and 
+	item.need_for '''
+	initial_l = []
+	for location in locations:
+		for meal_item in meal_items:
+			if meal_item.storage_loc != location:
 				continue
-			name = f"{i.name} [{i.need_for}]"
-			choice = (i.id, name)
-			choices.append(choice)
+			item_dict = {
+				'id': meal_item.id,
+				'name': meal_item.name,
+				'storage_loc_id': meal_item.storage_loc.id,
+				'shop_dept_id': meal_item.shop_dept.id,
+				'need_for': meal_item.need_for
+			}
+			initial_l.append(item_dict)
 
-		for j in fave_items:
-			if j.storage_loc != l:
+		for fave_item in fave_items:
+			if fave_item.storage_loc != location:
 				continue
-			choice = (j.id, j.name)
-			choices.append(choice)
+			item_dict = {
+				'id': fave_item.id,
+				'name': fave_item.name,
+				'storage_loc_id': fave_item.storage_loc.id,
+				'shop_dept_id': fave_item.shop_dept.id,
+				'need_for': ""
+			}
+			initial_l.append(item_dict)
+	return initial_l
+
+
+def create_list_choices(init_list):
+	''' takes in the initial list of dictionaries (in storage location order), extracts list 
+	index and name and constructs a 'choices' variable to pass to a multiple choice field form '''
+	choices = []
+	for i in range(len(init_list)):
+		description = init_list[i]['name']
+		if init_list[i]['need_for'] != "":
+			description += f" [{init_list[i]['need_for']}]"
+		choice = (i, description)
+		choices.append(choice)
 	return choices

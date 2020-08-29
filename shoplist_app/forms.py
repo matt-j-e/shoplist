@@ -52,8 +52,7 @@ class MealSelectForm(forms.Form):
 
 class SelectItemCheckboxForm(forms.Form):
 	selection = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=(), label="Select items")
-	storage_loc = forms.CharField(widget=forms.HiddenInput())
-	shop_dept = forms.CharField(widget=forms.HiddenInput())
+	
 
 
 

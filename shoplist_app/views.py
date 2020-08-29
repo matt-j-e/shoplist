@@ -8,6 +8,10 @@ import shoplist_app.helpers as helpers
 # list_meal_add and list_stock_add
 meal_choices = []
 
+# a global variable to hold all shopping list items. Compiled from: 1) meal_choices
+# and 2) the list of favourite items. This forms the basis of the final list creation functionality.
+initial_list = []
+
 def list_new(request):
 	''' Main menu page for creating a new shopping list. Simply two links:
 	Add meals to a new list & Add stock items to your list. '''
@@ -37,18 +41,20 @@ def list_stock_add(request):
 	location order TOGETHER WITH the meal shopping items added in the list_meal_add
 	process (also in the appropriate storage area) '''
 	items_for_meals = helpers.create_meals_shopping_list(meal_choices)
-	for item in items_for_meals:
-		print(item.id, item.name, item.storage_loc.id, item.need_for)
+	# for item in items_for_meals:
+		# print(item.id, item.name, item.storage_loc.id, item.need_for)
 	locations = StorageLoc.objects.all().order_by('sort_order')
 	# select all storage areas in sort order
 	faves = Item.objects.filter(favourite=True).order_by('storage_loc')
 	# select all items marked fave in storage_id order
+	global initial_list
+	initial_list = helpers.create_initial_list(items_for_meals, faves, locations)
+	print(initial_list)
 	form = SelectItemCheckboxForm()
-	form.fields["selection"].choices = helpers.create_list_choices(items_for_meals, faves, locations)
+	form.fields["selection"].choices = helpers.create_list_choices(initial_list)
+	# MAYBE A FORMSET TO ENABLE SEPARATION OF THE LIST BY STORAGE LOCATION??
 	context = {
-		'items_for_meals': items_for_meals,
-		'locations': locations,
-		'faves': faves,
+		'initial_list': initial_list,
 		'form': form
 		}
 	if request.method != 'POST':
