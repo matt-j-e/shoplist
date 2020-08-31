@@ -4,13 +4,16 @@ from .models import Item, StorageLoc, ShopDept, Meal
 from .forms import ItemForm, MealForm, LocationForm, DepartmentForm, FindItemForm, SelectItemForm, MealSelectForm, SelectItemCheckboxForm
 import shoplist_app.helpers as helpers
 
+meal_choices = []
 # a global varaible to enable meal_choices to be passed between view methods
 # list_meal_add and list_stock_add
-meal_choices = []
 
+initial_list = []
 # a global variable to hold all shopping list items. Compiled from: 1) meal_choices
 # and 2) the list of favourite items. This forms the basis of the final list creation functionality.
-initial_list = []
+
+final_list = []
+# a global variable to hold the final list of selected items
 
 def list_new(request):
 	''' Main menu page for creating a new shopping list. Simply two links:
@@ -45,23 +48,47 @@ def list_stock_add(request):
 		# print(item.id, item.name, item.storage_loc.id, item.need_for)
 	locations = StorageLoc.objects.all().order_by('sort_order')
 	# select all storage areas in sort order
-	faves = Item.objects.filter(favourite=True).order_by('storage_loc')
+	faves = Item.objects.filter(favourite=True).order_by('name')
 	# select all items marked fave in storage_id order
 	global initial_list
 	initial_list = helpers.create_initial_list(items_for_meals, faves, locations)
-	print(initial_list)
+	# initial_list_by_storage = helpers.sort_initial_list(initial_list, locations)
+	# print(initial_list)
 	form = SelectItemCheckboxForm()
 	form.fields["selection"].choices = helpers.create_list_choices(initial_list)
-	# MAYBE A FORMSET TO ENABLE SEPARATION OF THE LIST BY STORAGE LOCATION??
 	context = {
 		'initial_list': initial_list,
+		'locations': locations,
 		'form': form
 		}
 	if request.method != 'POST':
 		return render(request, 'shoplist_app/list_stock_add.html', context)
+	else:
+		form = SelectItemCheckboxForm(data=request.POST)
+		if form.is_valid:
+			selected_indexes = request.POST.getlist('selection')
+			global final_list
+			final_list = []
+			for i in range(len(initial_list)):
+				if str(i) in selected_indexes:
+					final_list.append(initial_list[i])
+			return redirect('show_final_list')
+
+
+def show_final_list(request):
+	all_depts = ShopDept.objects.all().order_by('sort_order')
+	used_depts = helpers.get_used_depts(final_list)
+	context = {
+		'all_depts': all_depts,
+		'used_depts': used_depts,
+		'final_list': final_list
+	}
+	return render(request, 'shoplist_app/show_final_list.html', context)
 
 
 def item_list(request):
+	''' A simple view that lists all of the items held in the database. 
+	Displayed fields are: 'item name', 'storage_loc', 'shop_dept', and 'favourite' (true or false) '''
 	items = Item.objects.all().order_by('name')
 	# for item in items:
 		# item.name = item.name.title()

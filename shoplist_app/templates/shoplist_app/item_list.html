@@ -1,7 +1,7 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-<p><a href="{% url 'add_item' meal_id=None %}">Add an item</a></p>
+<button class="add-button"><a href="{% url 'add_item' %}">Add an item</a></button>
 <table class="table table-sm">
 	<thead>
 		<tr>

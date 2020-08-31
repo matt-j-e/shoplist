@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>Choose meals for the next 7 days.</h2>
-<p><small>Leave as "No meal selected" if you don't need to cook a meal that day.</small></p>
+<p><small>Leave as "No meal selected" if you don't plan to cook a meal that day.</small></p>
 
 <form method="post" action="{% url 'meal_items_add' %}">
 	{{ formset.management_form }}

@@ -1,4 +1,5 @@
 from .models import Item, StorageLoc, ShopDept, Meal
+from operator import itemgetter
 
 
 def extract_meal_choices(data):
@@ -34,7 +35,7 @@ def create_meals_shopping_list(meal_choices):
 			meals_shopping_list.append(item)
 	return meals_shopping_list
 
-
+"""
 def create_initial_list(meal_items, fave_items, locations):
 	''' takes in the meals shopping list and the favourites list and constructs a list of 
 	dictionaries in storage location order. Each dictionary contains: 
@@ -69,6 +70,54 @@ def create_initial_list(meal_items, fave_items, locations):
 			}
 			initial_l.append(item_dict)
 	return initial_l
+"""
+
+def create_initial_list(meal_items, fave_items, locations):
+	''' takes in the meals shopping list and the favourites list and constructs a list of 
+	dictionaries in item name order. Each dictionary contains: 
+	item.id
+	item.name
+	item.storage_loc.id
+	item.shop_dept.id and 
+	item.need_for 
+	That list of dictionaries is then sorted into storage location order and returned '''
+	initial_list = []
+	for meal_item in meal_items:
+		item_dict = {
+			'id': meal_item.id,
+			'name': meal_item.name,
+			'storage_loc_id': meal_item.storage_loc.id,
+			'shop_dept_id': meal_item.shop_dept.id,
+			'need_for': meal_item.need_for
+		}
+		initial_list.append(item_dict)
+
+	for fave_item in fave_items:
+		item_dict = {
+			'id': fave_item.id,
+			'name': fave_item.name,
+			'storage_loc_id': fave_item.storage_loc.id,
+			'shop_dept_id': fave_item.shop_dept.id,
+			'need_for': ""
+		}
+		initial_list.append(item_dict)
+	# sort the dictionaries into 'name' order
+	initial_list.sort(key=itemgetter('name'))
+	initial_list_in_storage_order = sort_initial_list(initial_list, locations)
+	return initial_list_in_storage_order
+
+
+def sort_initial_list(initial_list, locations):
+	''' takes in the initial list of dictionaries in item name order and converts it
+	into a list of dictionaries in location order with items in each location in name
+	order '''
+	list_in_storage_order = []
+	for location in locations:
+		for item_dict in initial_list:
+			if item_dict['storage_loc_id'] != location.id:
+				continue
+			list_in_storage_order.append(item_dict)
+	return list_in_storage_order
 
 
 def create_list_choices(init_list):
@@ -82,3 +131,10 @@ def create_list_choices(init_list):
 		choice = (i, description)
 		choices.append(choice)
 	return choices
+
+
+def get_used_depts(final_list):
+	used_depts = []
+	for entry in final_list:
+		used_depts.append(entry['shop_dept_id'])
+	return used_depts

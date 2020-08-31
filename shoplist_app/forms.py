@@ -51,7 +51,7 @@ class MealSelectForm(forms.Form):
 
 
 class SelectItemCheckboxForm(forms.Form):
-	selection = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=(), label="Select items")
+	selection = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=())
 	
 
 

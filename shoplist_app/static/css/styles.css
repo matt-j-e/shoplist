@@ -1,0 +1,67 @@
+.center {
+	text-align: center;
+}
+
+body {
+	background-color: #F1E0D6;
+}
+
+header {
+	padding: 20px 10px;
+}
+
+header h2 {
+	text-align: center;
+	color: #583e2e;
+}
+
+.container {
+	width: 350px;
+	padding-bottom: 15px;
+}
+
+.section-divider {
+	display: block;
+	width: 80%;
+	background-color: #595775;
+	margin: 20px auto;
+}
+
+.section-divider p {
+	padding: 15px 5px;
+	text-align: center;	
+}
+
+.section-divider a {
+	text-transform: none;
+	color: #F1E0D6;
+	padding: 15px 5px;
+}
+
+.add-button {
+	width: 100%;
+	background-color: #aba6bf;
+	text-transform: none;
+	color: #F1E0D6;
+	padding: 5px;
+}
+
+.add-button a {
+	text-transform: none;
+	color: #595775;
+}
+
+.dept_name {
+	width: 100%;
+	background-color: #aba6bf;
+	padding: 5px;
+	margin-top: 15px;
+	border-top: 2px solid #583e2e;
+}
+
+#id_selection, .item-chooser {
+	list-style-type: none;
+	padding: 0px;
+}
+
+

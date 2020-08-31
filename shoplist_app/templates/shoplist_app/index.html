@@ -1,11 +1,15 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-			<div id="index_nav">
-				<p><a href="{% url 'list_new' %}">CREATE A NEW LIST</a></p>
-				<p><a href="{% url 'item_list' %}">MANAGE ITEMS</a></p>
-				<p><a href="{% url 'meal_list' %}">MANAGE MEALS</a></p>
-				<p><a href="{% url 'storage_list' %}">MANAGE STORAGE LOCATIONS</a></p>
-				<p><a href="{% url 'department_list' %}">MANAGE SHOP DEPARTMENTS</a></p>
-			</div>
+<div id="index_nav">
+	<section class="section-divider">
+	<p><a href="{% url 'list_new' %}">CREATE A NEW LIST</a></p>
+	</section>
+	<section class="section-divider">
+	<p><a href="{% url 'item_list' %}">MANAGE ITEMS</a></p>
+	<p><a href="{% url 'meal_list' %}">MANAGE MEALS</a></p>
+	<p><a href="{% url 'storage_list' %}">MANAGE STORAGE LOCATIONS</a></p>
+	<p><a href="{% url 'department_list' %}">MANAGE SHOP DEPARTMENTS</a></p>
+	</section>
+</div>
 {% endblock %}
