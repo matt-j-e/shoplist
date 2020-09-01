@@ -2,6 +2,26 @@
 	text-align: center;
 }
 
+.strong {
+	font-weight: bold;
+}
+
+.top-mar-20 {
+	margin-top: 20px;
+}
+
+.hideaway {
+	display: none;
+}
+
+.deeper td {
+	padding: 3px 0;
+}
+
+.got td {
+	opacity: 0.2;
+}
+
 body {
 	background-color: #F1E0D6;
 }
@@ -51,7 +71,7 @@ header h2 {
 	color: #595775;
 }
 
-.dept_name {
+.dept-name, .meal-name {
 	width: 100%;
 	background-color: #aba6bf;
 	padding: 5px;
@@ -59,9 +79,16 @@ header h2 {
 	border-top: 2px solid #583e2e;
 }
 
-#id_selection, .item-chooser {
+#id_selection, .item-chooser, .meal-outer, .meal-inner {
 	list-style-type: none;
 	padding: 0px;
 }
 
-
+.item {
+	display: inline-block;
+	padding: 2px 5px;
+	margin: 2px;
+	background-color: #583e2e;
+	color: #F1E0D6;
+	border-radius: 5px;
+}

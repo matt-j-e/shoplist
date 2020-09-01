@@ -1,14 +1,14 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-<h2>Your shop departments</h2>
-<h4 class="small">IN THE ORDER THAT YOU VISIT THEM</h4>
+<h2 class="center">Your shop depts.</h2>
+<h4 class="small center">IN THE ORDER THAT YOU VISIT THEM</h4>
 <table class="table table-sm">
 	{% for dept in departments %}
 		<tr>
-			<td>{{ dept.sort_order }}</td>
+			<!--<td>{{ dept.sort_order }}</td>-->
 			<td>{{ dept.name|capfirst }}</td>
-			<td><a href="{% url 'edit_department' dept.id %}">edit</a></td>
+			<td class="center"><a href="{% url 'edit_department' dept.id %}">edit</a></td>
 		</tr>
 	{% endfor %}
 </table>

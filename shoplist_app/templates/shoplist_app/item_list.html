@@ -5,13 +5,13 @@
 <table class="table table-sm">
 	<thead>
 		<tr>
-			<th>Item</th><th>Storage location</th><th>Shop department</th><th>Fave</th><th></th>
+			<th>Item</th><th class="hideaway">Storage location</th><th class="hideaway">Shop department</th><th class="center">Fave</th><th></th>
 		</tr>
 	</thead>
 {% for item in items %}
 	<tr>
-		<td>{{ item.name|capfirst }}</td><td>{{ item.storage_loc|capfirst }}</td><td>{{ item.shop_dept|capfirst }}</td>
-		<td>
+		<td>{{ item.name|capfirst }}</td><td class="hideaway">{{ item.storage_loc|capfirst }}</td><td class="hideaway">{{ item.shop_dept|capfirst }}</td>
+		<td class="center">
 			{% if item.favourite == True %}
 			Y
 			{% endif %}

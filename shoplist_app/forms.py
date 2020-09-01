@@ -28,9 +28,13 @@ class DepartmentForm(forms.ModelForm):
 class MealForm(forms.ModelForm):
 	class Meta:
 		model = Meal
-		# fields = ['name', 'short_name', 'serves', 'cook_time', 'total_time', 'ingredients', 'method']
+		fields = ['name', 'short_name', 'serves', 'cook_time', 'total_time', 'ingredients', 'method']
 		# temporarily removed ingredients & method from the form to simplify meal creation
-		fields = ['name', 'short_name', 'serves', 'cook_time', 'total_time']
+		# fields = ['name', 'short_name', 'serves', 'cook_time', 'total_time']
+		widgets = {
+            'ingredients': forms.Textarea(attrs={'cols': 20, 'rows': 10}),
+            'method': forms.Textarea(attrs={'cols': 20, 'rows': 10}),
+        }
 
 
 class FindItemForm(forms.Form):
@@ -47,7 +51,7 @@ class MealSelectForm(forms.Form):
 	choices.append((0, "No meal selected"))
 	for meal in meals:
 		choices.append((meal.id, meal.name))
-	selection = forms.ChoiceField(choices=choices)
+	selection = forms.ChoiceField(choices=choices, label='')
 
 
 class SelectItemCheckboxForm(forms.Form):

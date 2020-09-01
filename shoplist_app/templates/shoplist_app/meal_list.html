@@ -1,20 +1,20 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-<h2>Your meals</h2>
-<p><a href="{% url 'add_meal' %}">Add a meal</a></p>
-<ul>
+<h2 class="center">Your meals</h2>
+<button class="add-button"><a href="{% url 'add_meal' %}">Add a meal</a></button>
+<ul class="meal-outer">
 {% for meal in meals %}
-	<li>{{ meal.name|capfirst }}</li>
-	<ul>
-		<li>Serves: {{ meal.serves }}</li>
-		<li>Total time (mins): {{ meal.total_time }}</li>
-		<li>Ingredients: {{ meal.ingredients|linebreaks|capfirst }}</li>
-		<li>Method: {{ meal.method|linebreaks|capfirst }}</li>
+	<li class="strong meal-name center">{{ meal.name|capfirst }}</li>
+	<ul class="meal-inner">
+		<li><strong>Serves:</strong> {{ meal.serves }}</li>
+		<li><strong>Total time (mins):</strong> {{ meal.total_time }}</li>
+		<li><strong>Ingredients:</strong><br> {{ meal.ingredients|linebreaks|capfirst }}</li>
+		<li><strong>Method:</strong> {{ meal.method|linebreaks|capfirst }}</li>
 		<li>
-			Stuff to buy:
+			<strong>Stuff to buy:</strong><br>
 			{% for entry in meal.shoppinglist %}
-			<span>{{ entry|capfirst }};</span>
+			<span class="item">{{ entry|capfirst }}</span>
 			{% endfor %}
 		</li>
 	</ul>

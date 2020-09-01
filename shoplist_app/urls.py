@@ -18,5 +18,5 @@ urlpatterns = [
     path('manage/departments/edit/<int:department_id>', views.edit_department, name='edit_department'),
     path('manage/meals', views.meal_list, name='meal_list'),
     path('manage/meals/add', views.add_meal, name='add_meal'),
-    # path('manage/meals/add_meal_item/<meal_id>', views.add_meal_item, name='add_meal_item'),
+    path('manage/meals/add_meal_item/<meal_id>', views.add_meal_item, name='add_meal_item'),
 ]

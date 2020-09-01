@@ -1,11 +1,13 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-	<p>Add a new meal</p>
+	<h4 class="center">Add a new meal</h4>
 	<form action="{% url 'add_meal' %}" method="post">
 		{% csrf_token %}
-		{{ form.as_p }}
-		<button name="submit">Add meal</button>
+		<table>
+		{{ form }}
+		</table>
+		<button name="submit" class="add-button">Add meal</button>
 	</form>
 
 {% endblock content %}

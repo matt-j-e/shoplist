@@ -254,13 +254,13 @@ def add_meal(request):
 	context = {'form': form}
 	return render(request, 'shoplist_app/add_meal.html', context)
 
-"""
+
 def add_meal_item(request, meal_id):
 	''' add shopping items to a meal that is already in the db '''
 	meal = Meal.objects.get(id=meal_id)
 	item = Item.objects.get(id=request.POST["selection"])
 	meal.items.add(item)
-	return redirect('find_item') """
+	return redirect('find_item')
 
 
 

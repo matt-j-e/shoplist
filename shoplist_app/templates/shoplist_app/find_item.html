@@ -1,16 +1,19 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-	<h4>Add shopping items to: {{ meal.name|upper }}</h4>
-	<p>Check if an item already exists in the database</p>
+	<h4 class="center">Add shopping items to</h4>
+	<h6 class="center">{{ meal.name|upper }}</h6>
+	<p class="center">Check if an item already exists in the database</p>
+	<section class="top-mar-20">
 	<form action="{% url 'find_item' %}" method="post">
 		{% csrf_token %}
 		{{ form.as_p }}
-		<button name="submit">Search</button>
+		<button class="add-button" name="submit">Search</button>
 	</form>
+	</section>
 	<br>
-	<section>
-		<h4>Shopping items already added:</h4>
+	<section class="top-mar-20">
+		<h4 class="center">Shopping items already added:</h4>
 		<ul>
 		{% for i in meal.shoppinglist %}
 			<li>{{ i }}</li>

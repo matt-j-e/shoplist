@@ -6,7 +6,7 @@
 
 <form class="item-chooser" method="post" action="{% url 'stock_items_add' %}">
 	{% csrf_token %}
-	{{ form.as_ul }}	
+	{{ form }}	
 	<input type="submit" value="Finalise your list" name="submit">
 </form>
 
