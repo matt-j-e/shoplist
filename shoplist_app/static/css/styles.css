@@ -2,8 +2,16 @@
 	text-align: center;
 }
 
+.header-bar {
+	background-color: #ABA6BF;
+}
+
 .strong {
 	font-weight: bold;
+}
+
+.upper {
+	text-transform: uppercase;
 }
 
 .top-mar-20 {
@@ -24,26 +32,38 @@
 
 body {
 	background-color: #F1E0D6;
+	color: #583E2E;
 }
 
 header {
 	padding: 20px 10px;
+	margin-bottom: 15px;
+	background-color: #BF988F
 }
 
-header h2 {
+header h1 {
+	font-family: 'Bebas Neue', cursive;
 	text-align: center;
 	color: #583e2e;
 }
 
+header h1 a {
+	color: #583e2e;
+}
+
+header h1 span {
+	color: #595775;
+}
+
 .container {
-	width: 350px;
+	width: 375px;
 	padding-bottom: 15px;
 }
 
 .section-divider {
 	display: block;
 	width: 80%;
-	background-color: #595775;
+	background-color: #583E2E;
 	margin: 20px auto;
 }
 
@@ -58,9 +78,13 @@ header h2 {
 	padding: 15px 5px;
 }
 
+.bold-menu, .add-button {
+	font-family: 'Oswald', sans-serif;
+}
+
 .add-button {
 	width: 100%;
-	background-color: #aba6bf;
+	background-color: #583E2E;
 	text-transform: none;
 	color: #F1E0D6;
 	padding: 5px;
@@ -68,15 +92,16 @@ header h2 {
 
 .add-button a {
 	text-transform: none;
-	color: #595775;
+	color: #F1E0D6;
 }
 
 .dept-name, .meal-name {
 	width: 100%;
 	background-color: #aba6bf;
+	color: #595775;
 	padding: 5px;
 	margin-top: 15px;
-	border-top: 2px solid #583e2e;
+	border-top: 1px solid #583e2e;
 }
 
 #id_selection, .item-chooser, .meal-outer, .meal-inner {
@@ -88,7 +113,7 @@ header h2 {
 	display: inline-block;
 	padding: 2px 5px;
 	margin: 2px;
-	background-color: #583e2e;
-	color: #F1E0D6;
+	background-color: #595775;
+	color: #FFF;
 	border-radius: 5px;
 }

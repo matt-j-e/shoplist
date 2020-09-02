@@ -1,7 +1,7 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-	<h4 class="center">{{ meal.name }}</h4>
+	<h4 class="center header-bar">{{ meal.name|upper }}</h4>
 	<form method="post" action="{% url 'add_meal_item' meal.id %}">
 		{% csrf_token %}
 		

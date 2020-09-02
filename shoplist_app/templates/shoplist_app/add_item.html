@@ -1,7 +1,7 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-	<h4>Add a new item</h4>
+	<h4 class="center header-bar upper">Add a new item</h4>
 	{% if meal_id %}
 	<form action="{% url 'add_item' meal_id %}" method="post">
 	{% else %}

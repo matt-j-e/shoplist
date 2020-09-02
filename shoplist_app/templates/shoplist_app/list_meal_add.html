@@ -8,7 +8,7 @@
 	{{ formset.management_form }}
 	{% csrf_token %}
 	{% for form in formset %}
-	<h4>Day {{ forloop.counter }}</h4>
+	<h6>Day {{ forloop.counter }}</h6>
 	{{ form }}	
 	{% endfor %}
 	<input class="add-button" type="submit" value="Add your selection" name="submit">

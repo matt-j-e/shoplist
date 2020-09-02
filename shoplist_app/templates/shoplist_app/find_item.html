@@ -1,7 +1,7 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-	<h4 class="center">Add shopping items to</h4>
+	<h4 class="center header-bar upper">Add shopping items to</h4>
 	<h6 class="center">{{ meal.name|upper }}</h6>
 	<p class="center">Check if an item already exists in the database</p>
 	<section class="top-mar-20">
@@ -13,7 +13,7 @@
 	</section>
 	<br>
 	<section class="top-mar-20">
-		<h4 class="center">Shopping items already added:</h4>
+		<h4 class="center header-bar upper">items already added:</h4>
 		<ul>
 		{% for i in meal.shoppinglist %}
 			<li>{{ i }}</li>

@@ -1,7 +1,7 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-	<h4 class="center">Add a new meal</h4>
+	<h4 class="center header-bar upper">Add a new meal</h4>
 	<form action="{% url 'add_meal' %}" method="post">
 		{% csrf_token %}
 		<table>

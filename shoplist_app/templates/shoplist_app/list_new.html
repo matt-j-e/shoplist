@@ -1,12 +1,12 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-<h4 class="center">STEP 1</h4>
-<div class="section-divider">
+<h4 class="center">Meals to add?</h4>
+<div class="section-divider bold-menu">
 	<p><a href="{% url 'meal_items_add' %}">CHOOSE MEALS TO ADD TO A NEW LIST</a></p>
 </div>
-<h4 class="center">STEP 2</h4>
-<div class="section-divider">
+<h4 class="center">Skip adding meals</h4>
+<div class="section-divider bold-menu">
 	<p><a href="{% url 'stock_items_add' %}">ADD STOCK ITEMS TO THE LIST</a></p>
 </div>
 {% endblock %}

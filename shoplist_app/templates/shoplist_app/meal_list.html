@@ -1,7 +1,7 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-<h2 class="center">Your meals</h2>
+<h4 class="center header-bar upper">Your meals</h4>
 <button class="add-button"><a href="{% url 'add_meal' %}">Add a meal</a></button>
 <ul class="meal-outer">
 {% for meal in meals %}
