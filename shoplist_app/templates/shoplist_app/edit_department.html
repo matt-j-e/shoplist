@@ -1,7 +1,7 @@
 {% extends 'shoplist_app/base.html' %}
 
 {% block content %}
-	<h4 class="center">Edit shop department</h4>
+	<h4 class="center header-bar upper">Edit shop department</h4>
 	<form action="{% url 'edit_department' department.id %}" method="post">
 		{% csrf_token %}
 		<table>
@@ -11,7 +11,7 @@
 	</form>
 
 	<div class="top-mar-20">
-		<h4 class="center">Favourites found in this department</h4>
+		<h4 class="center header-bar">Favourites found in this department</h4>
 		<p>
 		{% for item in items %}
 			{% if item.favourite %}
@@ -24,7 +24,7 @@
 	</div>
 
 	<div class="top-mar-20">
-		<h4 class="center">Shop depts in the order you visit them</h4>
+		<h4 class="center header-bar">Shop depts in the order you visit them</h4>
 		<table class="table table-sm">
 		{% for department in all_departments %}
 		<tr>

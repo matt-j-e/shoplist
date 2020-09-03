@@ -2,7 +2,7 @@
 
 {% block content %}
 <button class="add-button"><a href="{% url 'add_item' %}">Add an item</a></button>
-<table class="table table-sm">
+<table class="table table-sm stripe-list">
 	<thead>
 		<tr>
 			<th>Item</th><th class="hideaway">Storage location</th><th class="hideaway">Shop department</th><th class="center">Fave</th><th></th>
@@ -16,7 +16,7 @@
 			Y
 			{% endif %}
 		</td>
-		<td><a href="{% url 'edit_item' item.id %}">edit</a></td>
+		<td><a href="{% url 'edit_item' item.id %}"><small>EDIT</small></a></td>
 	</tr>
 {% endfor %}
 </table>

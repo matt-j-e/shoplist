@@ -3,12 +3,12 @@
 {% block content %}
 <h4 class="center header-bar upper">Storage locations</h4>
 <h4 class="small center">IN THE ORDER THAT YOU VISIT THEM</h4>
-<table class="table table-sm">
+<table class="table table-sm stripe-list">
 	{% for location in locations %}
 		<tr>
 			<!--<td>{{ location.sort_order }}</td>-->
 			<td>{{ location.name|capfirst }}</td>
-			<td class="center"><a href="{% url 'edit_location' location.id %}">edit</a></td>
+			<td class="center"><a href="{% url 'edit_location' location.id %}"><small>EDIT</small></a></td>
 		</tr>
 	{% endfor %}
 </table>

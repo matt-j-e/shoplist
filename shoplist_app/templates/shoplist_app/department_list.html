@@ -3,12 +3,12 @@
 {% block content %}
 <h4 class="center header-bar upper">Your shop depts.</h4>
 <h4 class="small center">IN THE ORDER THAT YOU VISIT THEM</h4>
-<table class="table table-sm">
+<table class="table table-sm stripe-list">
 	{% for dept in departments %}
 		<tr>
 			<!--<td>{{ dept.sort_order }}</td>-->
 			<td>{{ dept.name|capfirst }}</td>
-			<td class="center"><a href="{% url 'edit_department' dept.id %}">edit</a></td>
+			<td class="center"><a href="{% url 'edit_department' dept.id %}"><small>EDIT</small></a></td>
 		</tr>
 	{% endfor %}
 </table>
