@@ -2,7 +2,7 @@
 
 {% block content %}
 <h5 class="center">CLICK TO TICK OFF</h4>
-<table>
+<table style="margin: 0 auto;">
 {% for dept in all_depts %}
 	{% if dept.id in used_depts %}
 	<tr>
@@ -14,7 +14,7 @@
 
 	{% if entry.shop_dept_id == dept.id %}
 	<tr class="deeper">
-	<td onclick="toggleFunction(event)">{{ entry.name|capfirst }} {% if entry.need_for != '' %} [{{ entry.need_for }}] {% endif %}</td>
+	<td onclick="toggleFunction(event)">{{ entry.name|capfirst }} {% if entry.need_for != '' %} --{{ entry.need_for }}-- {% endif %}</td>
 	<!--<td><button class="got-button" onclick="toggleFunction(event)">B</button></td>-->
 	</tr>
 	{% endif %}

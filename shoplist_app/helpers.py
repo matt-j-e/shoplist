@@ -125,9 +125,9 @@ def create_list_choices(init_list):
 	index and name and constructs a 'choices' variable to pass to a multiple choice field form '''
 	choices = []
 	for i in range(len(init_list)):
-		description = init_list[i]['name']
+		description = init_list[i]['name'].capitalize()
 		if init_list[i]['need_for'] != "":
-			description += f" [{init_list[i]['need_for']}]"
+			description += f" --{init_list[i]['need_for']}--"
 		choice = (i, description)
 		choices.append(choice)
 	return choices
