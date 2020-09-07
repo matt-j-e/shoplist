@@ -1,6 +1,9 @@
 from .models import Item, StorageLoc, ShopDept, Meal
 from operator import itemgetter
 
+"""
+Function no longer used. It was originally part of the formset functionality to provide 
+a dropdown list of meals ach day for 7 days. That didn't work so refactored.
 
 def extract_meal_choices(data):
 	''' takes in a request.POST object from a form submission, extracts the relevant data
@@ -15,7 +18,7 @@ def extract_meal_choices(data):
 		int(data['form-6-selection'])
 	]
 	return collected_data
-
+"""
 
 def create_meals_shopping_list(meal_choices):
 	''' takes in the meal_choices array which contains 7 integers representing the meals

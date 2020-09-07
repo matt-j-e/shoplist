@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.forms.formsets import formset_factory
 from .models import Item, StorageLoc, ShopDept, Meal
-from .forms import ItemForm, MealForm, LocationForm, DepartmentForm, FindItemForm, SelectItemForm, MealSelectForm, SelectItemCheckboxForm
+from .forms import ItemForm, MealForm, LocationForm, DepartmentForm, FindItemForm, SelectItemForm, SelectMealCheckboxForm, SelectItemCheckboxForm
 import shoplist_app.helpers as helpers
 
 meal_choices = []
@@ -24,19 +24,24 @@ def list_new(request):
 def list_meal_add(request):
 	''' A page where the user can choose which meals they will eat over coming 
 	days so that the required shopping items can be added to the list as step 1 '''
-	MealSelectFormset = formset_factory(MealSelectForm, extra=7)
-	if request.method != 'POST':	
-		return render(request, 'shoplist_app/list_meal_add.html', {'formset': MealSelectFormset})
+	meals = Meal.objects.all().order_by('name')
+	choices = []
+	for meal in meals:
+		choices.append((meal.id, meal.name.capitalize()))
+	form = SelectMealCheckboxForm()
+	form.fields["selection"].choices = choices
+	if request.method != 'POST':
+		return render(request, 'shoplist_app/list_meal_add.html', {'form': form})
 	else:
-		# print(request.POST) # request.POST seems to be a dictionary of lists where each list contains a single value
-		formset = MealSelectFormset(data=request.POST)
-		if formset.is_valid:
+		# print(request.POST) # request.POST is a QueryDict. The key we want is 'selection' which contains a list of meal ids
+		selected_indexes = request.POST.getlist('selection')
+		form = SelectMealCheckboxForm(data=request.POST)
+		if form.is_valid:
 			global meal_choices
-			meal_choices = helpers.extract_meal_choices(request.POST)
+			meal_choices = selected_indexes
 			return redirect('stock_items_add')
-		# meal_choices is a list of 7 integers that represent the
-		# meal_ids of chosen meals (the integer may be 0 if no meal chosen
-		# for that day)
+		# meal_choices is a list of integers that represent the
+		# meal_ids of chosen meals
 			
 			
 def list_stock_add(request):

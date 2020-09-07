@@ -44,18 +44,27 @@ class FindItemForm(forms.Form):
 class SelectItemForm(forms.Form):
 	selection = forms.ChoiceField(widget=forms.RadioSelect, choices=())
 
-
+'''
 class MealSelectForm(forms.Form):
 	meals = Meal.objects.all().order_by('name')
+	print(meals)
+	for meal in meals:
+		print(meal)
 	choices = []
 	choices.append((0, "No meal selected"))
 	for meal in meals:
 		choices.append((meal.id, meal.name))
 	selection = forms.ChoiceField(choices=choices, label='')
+'''
+
+
+class SelectMealCheckboxForm(forms.Form):
+	selection = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=(), label='')
+
 
 
 class SelectItemCheckboxForm(forms.Form):
-	selection = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=())
+	selection = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=(), label='')
 	
 
 
